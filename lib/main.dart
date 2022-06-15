@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/feature/presentation/bloc/person_list_cubit/person_list_cubit.dart';
+import 'package:rick_and_morty/feature/presentation/bloc/search_bloc/search_bloc.dart';
+import 'package:rick_and_morty/locator_service.dart' as di;
 
-void main() {
+import 'feature/presentation/pages/person_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -9,12 +17,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PersonListCubit>(
+            create: (context) => di.sl<PersonListCubit>()),
+        BlocProvider<PersonSearchBloc>(
+            create: (context) => di.sl<PersonSearchBloc>())
+      ],
+      child: MaterialApp(
+        theme: ThemeData.dark().copyWith(
+          backgroundColor: Colors.black,
+          scaffoldBackgroundColor: Colors.grey,
+        ),
+        home: const HomePage(),
       ),
-      home: Container(),
     );
   }
 }

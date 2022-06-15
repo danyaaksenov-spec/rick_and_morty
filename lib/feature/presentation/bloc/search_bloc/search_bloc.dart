@@ -6,7 +6,8 @@ import '../../../domain/usecases/search_person.dart';
 
 class PersonSearchBloc extends Bloc<PersonSearchEvent, PersonSearchState> {
   final SearchPerson searchPerson;
-  PersonSearchBloc(super.initialState, this.searchPerson);
+
+  PersonSearchBloc({required this.searchPerson}) : super(PersonSearchEmpty());
 
   Stream<PersonSearchState> mapEventToState(PersonSearchEvent event) async* {
     if (event is SearchPersons) {

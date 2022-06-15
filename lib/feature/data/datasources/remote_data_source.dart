@@ -25,7 +25,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'https://rickandmortyapi.com/api/character/?name=$query');
 
   Future<List<PersonModel>> _getPersonsFromUrl(String url) async {
-    print(url);
+    //print(url);
     final response = await client
         .get(Uri.parse(url), headers: {'Content-type': 'application/json'});
 
