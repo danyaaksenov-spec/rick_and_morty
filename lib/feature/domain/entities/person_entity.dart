@@ -4,7 +4,7 @@ class PersonEntity extends Equatable {
   final int id;
   final String name;
   final String status;
-  final String spacies;
+  final String species;
   final String type;
   final String gender;
   final LocationEntity origin;
@@ -13,11 +13,11 @@ class PersonEntity extends Equatable {
   final List<String> episode;
   final DateTime created;
 
-  PersonEntity({
+  const PersonEntity({
     required this.id,
     required this.name,
     required this.status,
-    required this.spacies,
+    required this.species,
     required this.type,
     required this.gender,
     required this.origin,
@@ -32,7 +32,7 @@ class PersonEntity extends Equatable {
         id,
         name,
         status,
-        spacies,
+        species,
         type,
         gender,
         origin,

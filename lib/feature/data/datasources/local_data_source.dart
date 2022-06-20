@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:rick_and_morty/core/error/exception.dart';
@@ -9,7 +11,7 @@ abstract class LocalDataSource {
   Future<void> personsToCache(List<PersonModel> persons);
 }
 
-const CACHED_PERSONS_LIST = 'CACHED_PERSONS_LIST';
+const cachedPersonsList = 'CACHED_PERSONS_LIST';
 
 class LocalDataSourceImpl implements LocalDataSource {
   final SharedPreferences sharedpreferences;
@@ -18,8 +20,7 @@ class LocalDataSourceImpl implements LocalDataSource {
 
   @override
   Future<List<PersonModel>> getLastPersonsFromCache() {
-    final jsonPersonsList =
-        sharedpreferences.getStringList(CACHED_PERSONS_LIST);
+    final jsonPersonsList = sharedpreferences.getStringList(cachedPersonsList);
 
     if (jsonPersonsList!.isNotEmpty) {
       return Future.value(jsonPersonsList
@@ -34,7 +35,7 @@ class LocalDataSourceImpl implements LocalDataSource {
   Future personsToCache(List<PersonModel> persons) {
     final List<String> jsonPersonsList =
         persons.map((person) => json.encode(person.toJson())).toList();
-    sharedpreferences.setStringList(CACHED_PERSONS_LIST, jsonPersonsList);
+    sharedpreferences.setStringList(cachedPersonsList, jsonPersonsList);
     print('Persons to write Cache: ${jsonPersonsList.length}');
     return Future.value(jsonPersonsList);
   }
